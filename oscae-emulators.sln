@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35312.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "oscae-emulators", "oscae-emulators\oscae-emulators.csproj", "{D75A19EA-1FBB-4528-B3FA-5E63A8CE4C95}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D75A19EA-1FBB-4528-B3FA-5E63A8CE4C95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D75A19EA-1FBB-4528-B3FA-5E63A8CE4C95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D75A19EA-1FBB-4528-B3FA-5E63A8CE4C95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D75A19EA-1FBB-4528-B3FA-5E63A8CE4C95}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DEAEE91E-D319-494E-9A04-C8BEAA0B181D}
+	EndGlobalSection
+EndGlobal
