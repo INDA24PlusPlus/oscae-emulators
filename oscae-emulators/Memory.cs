@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Dynamic;
 using System.Linq;
 using System.Runtime.Intrinsics.Arm;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,6 +13,8 @@ namespace oscae_emulators
     public class Memory
     {
         Dictionary<Int16, Register> registers = new Dictionary<Int16, Register>();
+
+        public event Action<Int16> RegisterChanged;
 
         public Int16 Get(Int16 address)
         {
@@ -31,6 +34,7 @@ namespace oscae_emulators
             {
                 registers.Add(address, new Register(value));
             }
+            RegisterChanged?.Invoke(address);
         }
 
         public Memory() { }

@@ -19,9 +19,14 @@ namespace oscae_emulators
             return value;
         }
 
+
+
+        public event Action<Int16> Changed;
         public void Set(Int16 value)
         {
+            Int16 prev = this.value;
             this.value = value;
+            Changed?.Invoke(prev);
         }
     }
 }

@@ -2,7 +2,7 @@
 {
     public class ProgramCounter
     {
-        Register register;
+        public Register register;
 
         public ProgramCounter(Int16 value)
         {
@@ -15,6 +15,11 @@
             Int16 ret = register.Get();
             register.Set(unchecked((Int16)(ret + 1)));
             return ret;
+        }
+
+        public Int16 Get()
+        {
+            return register.Get();
         }
 
         public void Set(Int16 value)
