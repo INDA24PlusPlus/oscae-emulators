@@ -9,7 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "oscae-emulators-gui", "osca
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A6DE0B3C-9C35-41C1-BBFB-72A4A8BE4024}"
 	ProjectSection(SolutionItems) = preProject
-		rom.txt = rom.txt
+		Add.hack = Add.hack
+		PongL.hack = PongL.hack
+		Rect.hack = Rect.hack
+		Test.hack = Test.hack
 	EndProjectSection
 EndProject
 Global

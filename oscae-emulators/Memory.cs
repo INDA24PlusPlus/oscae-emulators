@@ -43,8 +43,8 @@ namespace oscae_emulators
             Int16 i = 0;
             foreach (string line in File.ReadAllLines(path))
             {
-                Set(i, Int16.Parse(line.Trim(), System.Globalization.NumberStyles.BinaryNumber));
-                i++;
+                if (line.Length >= 16 && Int16.TryParse(line.Substring(0, 16), System.Globalization.NumberStyles.BinaryNumber, null, out Int16 num))
+                    Set(i++, num);
             }
         }
 

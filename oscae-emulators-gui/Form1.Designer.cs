@@ -49,6 +49,12 @@
             label3 = new Label();
             label4 = new Label();
             checkBox1 = new CheckBox();
+            pictureBox1 = new PictureBox();
+            button4 = new Button();
+            label5 = new Label();
+            label6 = new Label();
+            textBox6 = new TextBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // listView1
@@ -98,7 +104,7 @@
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(676, 423);
+            textBox1.Location = new Point(-14, 446);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(100, 23);
             textBox1.TabIndex = 2;
@@ -146,6 +152,7 @@
             textBox2.TabIndex = 6;
             textBox2.Text = "5";
             textBox2.TextAlign = HorizontalAlignment.Right;
+            textBox2.TextChanged += textBox2_TextChanged;
             textBox2.KeyPress += textBox2_KeyPress;
             // 
             // textBox3
@@ -226,11 +233,64 @@
             checkBox1.Text = "Follow PC";
             checkBox1.UseVisualStyleBackColor = true;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.BorderStyle = BorderStyle.FixedSingle;
+            pictureBox1.Location = new Point(402, 41);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(386, 193);
+            pictureBox1.TabIndex = 16;
+            pictureBox1.TabStop = false;
+            pictureBox1.MouseClick += pictureBox1_MouseClick;
+            // 
+            // button4
+            // 
+            button4.Location = new Point(713, 423);
+            button4.Name = "button4";
+            button4.Size = new Size(75, 23);
+            button4.TabIndex = 17;
+            button4.Text = "Load ROM";
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(402, 237);
+            label5.Name = "label5";
+            label5.Size = new Size(71, 15);
+            label5.TabIndex = 18;
+            label5.Text = "Keyboard: []";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(589, 302);
+            label6.Name = "label6";
+            label6.Size = new Size(49, 15);
+            label6.TabIndex = 20;
+            label6.Text = "RAM[A]";
+            // 
+            // textBox6
+            // 
+            textBox6.Location = new Point(589, 320);
+            textBox6.Name = "textBox6";
+            textBox6.Size = new Size(100, 23);
+            textBox6.TabIndex = 19;
+            textBox6.Text = "0";
+            textBox6.TextChanged += textBox6_TextChanged;
+            textBox6.KeyPress += textBox6_KeyPress;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 458);
+            Controls.Add(label6);
+            Controls.Add(textBox6);
+            Controls.Add(label5);
+            Controls.Add(button4);
+            Controls.Add(pictureBox1);
             Controls.Add(checkBox1);
             Controls.Add(label4);
             Controls.Add(label3);
@@ -246,8 +306,12 @@
             Controls.Add(textBox1);
             Controls.Add(listView2);
             Controls.Add(listView1);
+            KeyPreview = true;
             Name = "Form1";
             Text = "Form1";
+            KeyDown += Form1_KeyDown;
+            KeyUp += Form1_KeyUp;
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -274,5 +338,10 @@
         private Label label3;
         private Label label4;
         private CheckBox checkBox1;
+        private PictureBox pictureBox1;
+        private Button button4;
+        private Label label5;
+        private Label label6;
+        private TextBox textBox6;
     }
 }

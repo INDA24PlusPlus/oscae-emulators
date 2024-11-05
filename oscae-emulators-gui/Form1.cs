@@ -6,14 +6,22 @@ namespace oscae_emulators_gui
 {
     public partial class Form1 : Form
     {
-        CPU cpu;
+        CPU cpu = new CPU(new Memory());
 
+        Instruction.DisplayType instructionDisplayType = Instruction.DisplayType.Binary;
 
         public Form1()
         {
             InitializeComponent();
 
-            Memory rom = new Memory("..\\..\\..\\..\\rom.txt");
+            //Init("..\\..\\..\\..\\Rect.hack");
+        }
+
+        void Init(string path)
+        {
+            listView2.Items.Clear();
+            ramList.Clear();
+            Memory rom = new Memory(path);
             cpu = new CPU(rom);
 
 
@@ -25,10 +33,13 @@ namespace oscae_emulators_gui
             cpu.PC.register.Changed += UpdatePC;
             cpu.A.Changed += UpdateA;
             cpu.D.Changed += UpdateD;
+            HighlightNextInstruction(0);
 
             timer1.Tick += Update;
             timer1.Enabled = false;
             timer1.Interval = 200;
+
+            InitScreen();
         }
 
         private void Update(object sender, EventArgs e)
@@ -39,6 +50,10 @@ namespace oscae_emulators_gui
         private SortedList<Int16, Int16> ramList = new SortedList<Int16, Int16>();
         private void UpdateListRAM(Int16 address)
         {
+            UpdateScreen(address);
+
+            textBox6.Text = cpu.ram.Get(cpu.A.Get()).ToString();
+
             string addressStr = address.ToString();
 
             Int16 value = cpu.ram.Get(address);
@@ -52,6 +67,7 @@ namespace oscae_emulators_gui
                 ramList[address] = value;
                 listView2.Items.Cast<ListViewItem>().FirstOrDefault(i => i.Text == addressStr).SubItems[1].Text = cpu.ram.Get(address).ToString();
             }
+
         }
 
         Color savedBackColor;
@@ -60,22 +76,27 @@ namespace oscae_emulators_gui
         {
 
             // restore old
-            listView1.Items[previousPC].BackColor = savedBackColor;
+            if (previousPC < listView1.Items.Count)
+                listView1.Items[previousPC].BackColor = savedBackColor;
 
 
             // set new
             Int16 newPC = cpu.PC.Get();
+            if (newPC < listView1.Items.Count)
+            {
 
-            savedBackColor = listView1.Items[newPC].BackColor;
-            listView1.Items[newPC].BackColor = highlightColor;
+                savedBackColor = listView1.Items[newPC].BackColor;
+                listView1.Items[newPC].BackColor = highlightColor;
 
-            if (checkBox1.Checked)
-                listView1.Items[newPC].EnsureVisible();
+                if (checkBox1.Checked)
+                    listView1.Items[newPC].EnsureVisible();
+            }
         }
 
         private void UpdateA(Int16 prev)
         {
             textBox3.Text = cpu.A.Get().ToString();
+            textBox6.Text = cpu.ram.Get(cpu.A.Get()).ToString();
         }
         private void UpdateD(Int16 prev)
         {
@@ -92,7 +113,6 @@ namespace oscae_emulators_gui
 
         }
 
-        Instruction.DisplayType instructionDisplayType = Instruction.DisplayType.Binary;
         private void listView1_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             if (e.Column == 1)
@@ -120,9 +140,10 @@ namespace oscae_emulators_gui
             listView1.Items.Clear();
             foreach (var inst in cpu.rom.GetAll())
             {
-                ListViewItem item = new ListViewItem(new[] { inst.Key.ToString(), Instruction.AsString(inst.Value.Get(), type)});
+                ListViewItem item = new ListViewItem(new[] { inst.Key.ToString(), Instruction.AsString(inst.Value.Get(), type) });
                 listView1.Items.Add(item);
             }
+            HighlightNextInstruction(0);
         }
 
         private void listView2_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -183,6 +204,11 @@ namespace oscae_emulators_gui
             {
                 e.Handled = true;
             }
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
             try
             {
                 timer1.Interval = 1000 / Convert.ToInt32(textBox2.Text);
@@ -271,6 +297,88 @@ namespace oscae_emulators_gui
             try
             {
                 cpu.PC.Set(Convert.ToInt16(textBox5.Text));
+            }
+            catch (Exception) { }
+        }
+
+        // screen
+        private Bitmap screenBitmap;
+        private int pixelWidth = 512;
+        private int pixelHeight = 256;
+
+        void InitScreen()
+        {
+            screenBitmap = new Bitmap(pixelWidth, pixelHeight);
+            pictureBox1.Image = screenBitmap;
+        }
+
+        void UpdateScreen(Int16 address)
+        {
+            if (address < 0x4000 || address > 0x5FFF)
+                return;
+
+            int pixel0 = address - 0x4000;
+            int pixelX = (pixel0 % 32) * 16;
+            int pixelY = pixel0 / 32;
+            Int16 pixels = cpu.ram.Get(address);
+            for (int i = 0; i < 16; i++)
+                screenBitmap.SetPixel(pixelX + i, pixelY, ((pixels >> i) & 1) == 1 ? Color.Black : Color.White);
+            pictureBox1.Refresh();
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            cpu.ram.Set(0x6000, Convert.ToInt16(e.KeyValue));
+            label5.Text = "Keyboard: [" + (char)e.KeyValue + "]";
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.InitialDirectory = Environment.CurrentDirectory;
+                //openFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+                //openFileDialog.FilterIndex = 1;
+                openFileDialog.RestoreDirectory = true;
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string selectedFilePath = openFileDialog.FileName;
+
+
+                    Init(selectedFilePath);
+                }
+            }
+        }
+
+        private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
+        {
+            pictureBox1.Parent.Focus();
+        }
+
+        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (cpu.ram.Get(0x6000) == Convert.ToInt16(e.KeyValue))
+            {
+                cpu.ram.Set(0x6000, 0);
+                label5.Text = "Keyboard: []";
+            }
+        }
+
+        private void textBox6_KeyPress(object sender, KeyPressEventArgs e) // RAM[A]
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void textBox6_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                cpu.ram.Set(cpu.A.Get(), Convert.ToInt16(textBox6.Text));
             }
             catch (Exception) { }
         }
