@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace oscae_emulators
 {
-    internal class Register
+    public class Register
     {
         Int16 value = 0;
         public Register(Int16 value)

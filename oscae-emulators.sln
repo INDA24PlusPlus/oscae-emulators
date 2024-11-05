@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "oscae-emulators", "oscae-emulators\oscae-emulators.csproj", "{D75A19EA-1FBB-4528-B3FA-5E63A8CE4C95}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "oscae-emulators", "oscae-emulators\oscae-emulators.csproj", "{D75A19EA-1FBB-4528-B3FA-5E63A8CE4C95}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "oscae-emulators-gui", "oscae-emulators-gui\oscae-emulators-gui.csproj", "{A7CE7096-0195-4B9B-88B8-95C1267F061F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{D75A19EA-1FBB-4528-B3FA-5E63A8CE4C95}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D75A19EA-1FBB-4528-B3FA-5E63A8CE4C95}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D75A19EA-1FBB-4528-B3FA-5E63A8CE4C95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7CE7096-0195-4B9B-88B8-95C1267F061F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7CE7096-0195-4B9B-88B8-95C1267F061F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7CE7096-0195-4B9B-88B8-95C1267F061F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7CE7096-0195-4B9B-88B8-95C1267F061F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

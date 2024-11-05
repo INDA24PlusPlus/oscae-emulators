@@ -4,14 +4,7 @@
     {
         static void Main(string[] args)
         {
-            Memory rom = new Memory();
-            Int16 i = 0;
-            foreach (string line in File.ReadAllLines("rom.txt"))
-            {
-                rom.Set(i, Int16.Parse(line.Trim(), System.Globalization.NumberStyles.BinaryNumber));
-                i++;
-            }
-
+            Memory rom = new Memory("..\\..\\..\\..\\rom.txt");
 
 
             CPU cpu = new CPU(rom);

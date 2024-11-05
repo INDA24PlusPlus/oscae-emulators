@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace oscae_emulators
 {
-    internal enum JumpCondition
+    public enum JumpCondition
     {
         None,
         JGT,

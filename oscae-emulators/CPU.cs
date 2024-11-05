@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace oscae_emulators
 {
-    internal class CPU
+    public class CPU
     {
         public Memory ram = new Memory();
         public Memory rom = new Memory();

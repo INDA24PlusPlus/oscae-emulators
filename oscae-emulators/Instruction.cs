@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace oscae_emulators
 {
-    class Instruction
+    public class Instruction
     {
         public Int16 raw = 0;
         public Instruction(Int16 instruction)

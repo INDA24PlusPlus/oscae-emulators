@@ -1,6 +1,6 @@
 ﻿namespace oscae_emulators
 {
-    internal class ProgramCounter
+    public class ProgramCounter
     {
         Register register;
 
