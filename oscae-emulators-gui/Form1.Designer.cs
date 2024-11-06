@@ -35,7 +35,6 @@
             listView2 = new ListView();
             number = new ColumnHeader();
             register = new ColumnHeader();
-            textBox1 = new TextBox();
             button1 = new Button();
             button2 = new Button();
             button3 = new Button();
@@ -62,8 +61,9 @@
             listView1.Columns.AddRange(new ColumnHeader[] { numbers, instructions });
             listView1.Dock = DockStyle.Left;
             listView1.Location = new Point(0, 0);
+            listView1.Margin = new Padding(3, 4, 3, 4);
             listView1.Name = "listView1";
-            listView1.Size = new Size(198, 458);
+            listView1.Size = new Size(226, 611);
             listView1.TabIndex = 0;
             listView1.UseCompatibleStateImageBehavior = false;
             listView1.View = View.Details;
@@ -84,13 +84,13 @@
             // 
             listView2.Columns.AddRange(new ColumnHeader[] { number, register });
             listView2.Dock = DockStyle.Left;
-            listView2.Location = new Point(198, 0);
+            listView2.Location = new Point(226, 0);
+            listView2.Margin = new Padding(3, 4, 3, 4);
             listView2.Name = "listView2";
-            listView2.Size = new Size(198, 458);
+            listView2.Size = new Size(226, 611);
             listView2.TabIndex = 1;
             listView2.UseCompatibleStateImageBehavior = false;
             listView2.View = View.Details;
-            listView2.MouseDoubleClick += listView2_MouseDoubleClick;
             // 
             // number
             // 
@@ -102,22 +102,12 @@
             register.Text = "RAM";
             register.Width = 140;
             // 
-            // textBox1
-            // 
-            textBox1.Location = new Point(-14, 446);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(100, 23);
-            textBox1.TabIndex = 2;
-            textBox1.Visible = false;
-            textBox1.TextChanged += textBox1_TextChanged;
-            textBox1.KeyDown += textBox1_KeyDown;
-            textBox1.Leave += textBox1_Leave;
-            // 
             // button1
             // 
-            button1.Location = new Point(402, 12);
+            button1.Location = new Point(459, 16);
+            button1.Margin = new Padding(3, 4, 3, 4);
             button1.Name = "button1";
-            button1.Size = new Size(75, 23);
+            button1.Size = new Size(86, 31);
             button1.TabIndex = 3;
             button1.Text = "Start";
             button1.UseVisualStyleBackColor = true;
@@ -125,9 +115,10 @@
             // 
             // button2
             // 
-            button2.Location = new Point(483, 12);
+            button2.Location = new Point(552, 16);
+            button2.Margin = new Padding(3, 4, 3, 4);
             button2.Name = "button2";
-            button2.Size = new Size(75, 23);
+            button2.Size = new Size(86, 31);
             button2.TabIndex = 4;
             button2.Text = "Stop";
             button2.UseVisualStyleBackColor = true;
@@ -135,9 +126,10 @@
             // 
             // button3
             // 
-            button3.Location = new Point(564, 12);
+            button3.Location = new Point(645, 16);
+            button3.Margin = new Padding(3, 4, 3, 4);
             button3.Name = "button3";
-            button3.Size = new Size(75, 23);
+            button3.Size = new Size(86, 31);
             button3.TabIndex = 5;
             button3.Text = "Step";
             button3.UseVisualStyleBackColor = true;
@@ -145,10 +137,11 @@
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(705, 12);
+            textBox2.Location = new Point(806, 16);
+            textBox2.Margin = new Padding(3, 4, 3, 4);
             textBox2.Name = "textBox2";
             textBox2.PlaceholderText = "Clock Hz";
-            textBox2.Size = new Size(83, 23);
+            textBox2.Size = new Size(94, 27);
             textBox2.TabIndex = 6;
             textBox2.Text = "5";
             textBox2.TextAlign = HorizontalAlignment.Right;
@@ -157,9 +150,10 @@
             // 
             // textBox3
             // 
-            textBox3.Location = new Point(483, 320);
+            textBox3.Location = new Point(552, 427);
+            textBox3.Margin = new Padding(3, 4, 3, 4);
             textBox3.Name = "textBox3";
-            textBox3.Size = new Size(100, 23);
+            textBox3.Size = new Size(114, 27);
             textBox3.TabIndex = 7;
             textBox3.Text = "0";
             textBox3.TextChanged += textBox3_TextChanged;
@@ -168,17 +162,18 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(645, 16);
+            label1.Location = new Point(737, 21);
             label1.Name = "label1";
-            label1.Size = new Size(54, 15);
+            label1.Size = new Size(67, 20);
             label1.TabIndex = 8;
             label1.Text = "Clock Hz";
             // 
             // textBox4
             // 
-            textBox4.Location = new Point(483, 349);
+            textBox4.Location = new Point(552, 465);
+            textBox4.Margin = new Padding(3, 4, 3, 4);
             textBox4.Name = "textBox4";
-            textBox4.Size = new Size(100, 23);
+            textBox4.Size = new Size(114, 27);
             textBox4.TabIndex = 9;
             textBox4.Text = "0";
             textBox4.TextChanged += textBox4_TextChanged;
@@ -186,9 +181,10 @@
             // 
             // textBox5
             // 
-            textBox5.Location = new Point(483, 378);
+            textBox5.Location = new Point(552, 504);
+            textBox5.Margin = new Padding(3, 4, 3, 4);
             textBox5.Name = "textBox5";
-            textBox5.Size = new Size(100, 23);
+            textBox5.Size = new Size(114, 27);
             textBox5.TabIndex = 10;
             textBox5.Text = "0";
             textBox5.TextChanged += textBox5_TextChanged;
@@ -197,27 +193,27 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(420, 323);
+            label2.Location = new Point(480, 431);
             label2.Name = "label2";
-            label2.Size = new Size(57, 15);
+            label2.Size = new Size(73, 20);
             label2.TabIndex = 11;
             label2.Text = "A register";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(420, 349);
+            label3.Location = new Point(480, 465);
             label3.Name = "label3";
-            label3.Size = new Size(57, 15);
+            label3.Size = new Size(74, 20);
             label3.TabIndex = 12;
             label3.Text = "D register";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(420, 378);
+            label4.Location = new Point(480, 504);
             label4.Name = "label4";
-            label4.Size = new Size(22, 15);
+            label4.Size = new Size(26, 20);
             label4.TabIndex = 13;
             label4.Text = "PC";
             // 
@@ -226,9 +222,10 @@
             checkBox1.AutoSize = true;
             checkBox1.Checked = true;
             checkBox1.CheckState = CheckState.Checked;
-            checkBox1.Location = new Point(483, 407);
+            checkBox1.Location = new Point(552, 543);
+            checkBox1.Margin = new Padding(3, 4, 3, 4);
             checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(79, 19);
+            checkBox1.Size = new Size(96, 24);
             checkBox1.TabIndex = 15;
             checkBox1.Text = "Follow PC";
             checkBox1.UseVisualStyleBackColor = true;
@@ -236,18 +233,20 @@
             // pictureBox1
             // 
             pictureBox1.BorderStyle = BorderStyle.FixedSingle;
-            pictureBox1.Location = new Point(402, 41);
+            pictureBox1.Location = new Point(459, 55);
+            pictureBox1.Margin = new Padding(3, 4, 3, 4);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(386, 193);
+            pictureBox1.Size = new Size(441, 257);
             pictureBox1.TabIndex = 16;
             pictureBox1.TabStop = false;
             pictureBox1.MouseClick += pictureBox1_MouseClick;
             // 
             // button4
             // 
-            button4.Location = new Point(713, 423);
+            button4.Location = new Point(815, 564);
+            button4.Margin = new Padding(3, 4, 3, 4);
             button4.Name = "button4";
-            button4.Size = new Size(75, 23);
+            button4.Size = new Size(86, 31);
             button4.TabIndex = 17;
             button4.Text = "Load ROM";
             button4.UseVisualStyleBackColor = true;
@@ -256,26 +255,27 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(402, 237);
+            label5.Location = new Point(459, 316);
             label5.Name = "label5";
-            label5.Size = new Size(71, 15);
+            label5.Size = new Size(90, 20);
             label5.TabIndex = 18;
             label5.Text = "Keyboard: []";
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(589, 302);
+            label6.Location = new Point(673, 403);
             label6.Name = "label6";
-            label6.Size = new Size(49, 15);
+            label6.Size = new Size(61, 20);
             label6.TabIndex = 20;
             label6.Text = "RAM[A]";
             // 
             // textBox6
             // 
-            textBox6.Location = new Point(589, 320);
+            textBox6.Location = new Point(673, 427);
+            textBox6.Margin = new Padding(3, 4, 3, 4);
             textBox6.Name = "textBox6";
-            textBox6.Size = new Size(100, 23);
+            textBox6.Size = new Size(114, 27);
             textBox6.TabIndex = 19;
             textBox6.Text = "0";
             textBox6.TextChanged += textBox6_TextChanged;
@@ -283,9 +283,9 @@
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 458);
+            ClientSize = new Size(914, 611);
             Controls.Add(label6);
             Controls.Add(textBox6);
             Controls.Add(label5);
@@ -303,10 +303,10 @@
             Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(button1);
-            Controls.Add(textBox1);
             Controls.Add(listView2);
             Controls.Add(listView1);
             KeyPreview = true;
+            Margin = new Padding(3, 4, 3, 4);
             Name = "Form1";
             Text = "Form1";
             KeyDown += Form1_KeyDown;
@@ -324,7 +324,6 @@
         private ListView listView2;
         private ColumnHeader number;
         private ColumnHeader register;
-        private TextBox textBox1;
         private Button button1;
         private Button button2;
         private Button button3;

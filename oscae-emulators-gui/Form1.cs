@@ -24,7 +24,6 @@ namespace oscae_emulators_gui
             Memory rom = new Memory(path);
             cpu = new CPU(rom);
 
-
             InitializeROMList(instructionDisplayType);
             if (listView1.Items.Count > 0)
                 savedBackColor = listView1.Items[0].BackColor;
@@ -33,7 +32,6 @@ namespace oscae_emulators_gui
             cpu.PC.register.Changed += UpdatePC;
             cpu.A.Changed += UpdateA;
             cpu.D.Changed += UpdateD;
-            HighlightNextInstruction(0);
 
             timer1.Tick += Update;
             timer1.Enabled = false;
@@ -70,7 +68,7 @@ namespace oscae_emulators_gui
 
         }
 
-        Color savedBackColor;
+        Color savedBackColor = Color.White;
         Color highlightColor = Color.Yellow;
         private void HighlightNextInstruction(Int16 previousPC)
         {
@@ -84,12 +82,14 @@ namespace oscae_emulators_gui
             Int16 newPC = cpu.PC.Get();
             if (newPC < listView1.Items.Count)
             {
+                // save
+                var currentInst = listView1.Items[newPC];
 
-                savedBackColor = listView1.Items[newPC].BackColor;
-                listView1.Items[newPC].BackColor = highlightColor;
+                savedBackColor = currentInst.BackColor;
+                currentInst.BackColor = highlightColor;
 
                 if (checkBox1.Checked)
-                    listView1.Items[newPC].EnsureVisible();
+                    currentInst.EnsureVisible();
             }
         }
 
@@ -143,59 +143,7 @@ namespace oscae_emulators_gui
                 ListViewItem item = new ListViewItem(new[] { inst.Key.ToString(), Instruction.AsString(inst.Value.Get(), type) });
                 listView1.Items.Add(item);
             }
-            HighlightNextInstruction(0);
-        }
-
-        private void listView2_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            ListViewHitTestInfo info = listView2.HitTest(e.Location);
-            ListViewItem item = info.Item;
-            int subItemIndex = info.Item?.SubItems.IndexOf(info.SubItem) ?? -1;
-
-            if (item != null && subItemIndex > 0)  // Only allow editing for subitems
-            {
-                Rectangle bounds = info.SubItem.Bounds;
-                textBox1.SetBounds(bounds.X, bounds.Y, bounds.Width, bounds.Height);
-                textBox1.Text = info.SubItem.Text;
-                textBox1.Tag = new Tuple<ListViewItem, int>(item, subItemIndex);
-                textBox1.Visible = true;
-                textBox1.BringToFront();
-                textBox1.Focus();
-            }
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            SaveEdit();
-        }
-
-        private void textBox1_Leave(object sender, EventArgs e)
-        {
-            SaveEdit();
-        }
-
-        private void textBox1_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                SaveEdit();
-                e.SuppressKeyPress = true;  // Prevent ding sound
-            }
-            else if (e.KeyCode == Keys.Escape)
-            {
-                textBox1.Visible = false;  // Cancel edit
-            }
-        }
-
-        private void SaveEdit()
-        {
-            if (textBox1.Tag is Tuple<ListViewItem, int> info)
-            {
-                ListViewItem item = info.Item1;
-                int subItemIndex = info.Item2;
-                item.SubItems[subItemIndex].Text = textBox1.Text;
-            }
-            textBox1.Visible = false;
+            HighlightNextInstruction(-1);
         }
 
         private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
