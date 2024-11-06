@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.Intrinsics.Arm;
+using Microsoft.VisualBasic;
 using oscae_emulators;
 
 namespace oscae_emulators_gui
@@ -14,7 +15,7 @@ namespace oscae_emulators_gui
         {
             InitializeComponent();
 
-            //Init("..\\..\\..\\..\\Rect.hack");
+            Init("..\\..\\..\\..\\Test.hack");
         }
 
         void Init(string path)
@@ -25,8 +26,6 @@ namespace oscae_emulators_gui
             cpu = new CPU(rom);
 
             InitializeROMList(instructionDisplayType);
-            if (listView1.Items.Count > 0)
-                savedBackColor = listView1.Items[0].BackColor;
 
             cpu.ram.RegisterChanged += UpdateListRAM;
             cpu.PC.register.Changed += UpdatePC;
@@ -35,14 +34,24 @@ namespace oscae_emulators_gui
 
             timer1.Tick += Update;
             timer1.Enabled = false;
-            timer1.Interval = 200;
+            timer1.Interval = 10;
+            textBox2.Text = "100";
 
             InitScreen();
         }
 
+        double cyclesRest = 0;
+        double cyclesPerTick = 1;
         private void Update(object sender, EventArgs e)
         {
-            cpu.Cycle();
+            cyclesRest += cyclesPerTick;
+            if (cyclesRest > 100)
+                cyclesRest = 100; // cap to not cause stop in program
+            while (cyclesRest > 0)
+            {
+                cyclesRest -= 1;
+                cpu.Cycle();
+            }
         }
 
         private SortedList<Int16, Int16> ramList = new SortedList<Int16, Int16>();
@@ -72,14 +81,14 @@ namespace oscae_emulators_gui
         Color highlightColor = Color.Yellow;
         private void HighlightNextInstruction(Int16 previousPC)
         {
-
+            int prev = unchecked((ushort)previousPC);
             // restore old
-            if (previousPC < listView1.Items.Count)
-                listView1.Items[previousPC].BackColor = savedBackColor;
+            if (prev < listView1.Items.Count)
+                listView1.Items[prev].BackColor = savedBackColor;
 
 
             // set new
-            Int16 newPC = cpu.PC.Get();
+            int newPC = unchecked((ushort)cpu.PC.Get());
             if (newPC < listView1.Items.Count)
             {
                 // save
@@ -159,12 +168,20 @@ namespace oscae_emulators_gui
 
             try
             {
-                timer1.Interval = 1000 / Convert.ToInt32(textBox2.Text);
+                // interval is always 10 ms
+                int hz = Convert.ToInt32(textBox2.Text);
+                cyclesPerTick = hz / 100;
+                if (cyclesPerTick > 100)
+                {
+                    timer1.Interval = 1;
+                    cyclesPerTick /= 10;
+                }
+                else
+                {
+                    timer1.Interval = 10;
+                }
             }
-            catch (Exception)
-            {
-                timer1.Interval = int.MaxValue;
-            }
+            catch (Exception) { }
         }
 
         private void button1_Click(object sender, EventArgs e) // Start
@@ -285,7 +302,7 @@ namespace oscae_emulators_gui
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-                openFileDialog.InitialDirectory = Environment.CurrentDirectory;
+                openFileDialog.InitialDirectory = Environment.CurrentDirectory + "\\..\\..\\..\\..\\";
                 //openFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
                 //openFileDialog.FilterIndex = 1;
                 openFileDialog.RestoreDirectory = true;

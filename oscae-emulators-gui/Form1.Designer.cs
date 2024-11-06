@@ -233,10 +233,11 @@
             // pictureBox1
             // 
             pictureBox1.BorderStyle = BorderStyle.FixedSingle;
-            pictureBox1.Location = new Point(459, 55);
+            pictureBox1.Location = new Point(458, 55);
             pictureBox1.Margin = new Padding(3, 4, 3, 4);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(441, 257);
+            pictureBox1.Size = new Size(440, 220);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 16;
             pictureBox1.TabStop = false;
             pictureBox1.MouseClick += pictureBox1_MouseClick;
@@ -255,7 +256,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(459, 316);
+            label5.Location = new Point(458, 279);
             label5.Name = "label5";
             label5.Size = new Size(90, 20);
             label5.TabIndex = 18;

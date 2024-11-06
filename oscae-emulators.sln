@@ -10,6 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{32D67D98-8F6A-4D88-9880-C73B53460FC8}"
 	ProjectSection(SolutionItems) = preProject
 		rom.txt = rom.txt
+		Test.hack = Test.hack
 	EndProjectSection
 EndProject
 Global
